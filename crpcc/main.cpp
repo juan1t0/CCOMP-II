@@ -1,13 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
-#include <sstream>
 #include <string>
 
 using namespace std;
-
-string abc("{abcdefghijklmnopqrstuvwxyz ");
-
 
 int mode(int a , int b){
 	int q,r;
@@ -64,37 +60,19 @@ string encrip(string fr,int kl_public){
     string aux;
     int t ;
     for(int i=0;i<fr.size();i++){
-        t= abc.find(fr[i]);
+        t= fr[i];
         t*=kl_public;
-        ostringstream ss;
-        ss << t;
-        aux +=ss.str();
-        aux += ' ';
+        aux +=t;
         }
-        aux += '|';
     return aux;
 }
-int* for_des(string num){
-    int a[999];
-    string w;
-    int j=0;
-    for(int i=0;num[i]!='|';i++){
-        if(num[i] == ' '){
-            istringstream ( w ) >> a[j];
-            j++;
-            w="";}
-        else
-            w+=num[i];
-        }
-    int *aa = a;
-    return aa;
-}
-string descrip(int rf[] ,int kl_private){
+
+string descrip(string rf ,int kl_private){
     string aux;
-    int r;
-    for(int i=0;rf[i]!='\0';i++){
-        r= mode(rf[i] * kl_private, abc.size());
-        aux+=abc[r];
+    int r,sz=rf.size();
+    for(int i=0;i<sz;i++){
+        r= mode(rf[i] * kl_private, 256);
+        aux+=r;
         }
     return aux;
 }
@@ -138,7 +116,7 @@ int main()
     fichero.open("hmcrp.txt");
     getline(fichero,frase);
     fichero.close();
-    int *let =(for_des(frase));
+    //int *let =(for_des(frase));
     cout<<"Desea ver el archivo encriptado hmcrp.txt (S/n) :"<<endl;
     cin>>respuesta;
     if(respuesta == "s")
@@ -146,11 +124,11 @@ int main()
     cout<<"Mostrar el texto original (S/n) :"<<endl;
     cin>>respuesta;
     if(respuesta == "s")
-        cout<<descrip(let,klave_privada)<<endl;
+        cout<<descrip(frase,klave_privada)<<endl;
 
     return 0;
 }
-// a= 28 b = 17 | x = -3  y = 5
+// a= 256 b = 73 | x = 2  y = -7
 /*  letra * y = crip
     crip * b = plain
     plain mod 27 = letra*/
