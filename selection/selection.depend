@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1492794966 source:/home/juanpablo/ciencia-d-l-complutacion/ccomp-II/selection/main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+
