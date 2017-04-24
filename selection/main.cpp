@@ -36,18 +36,38 @@ void selection(int *p,int *q){
     }
     imprimir(im,q);
 }
+void insertt(int *p,int *q){
+    int *aux,*im;
+    im=p;
+    int val;
 
+    for(; p <= q ; p++ ){
+        val=*p;
+        aux = p;
+        while(aux > im and *(aux-1)>val){
+            swap(aux,aux-1);
+            aux--;
+        }
+        *aux = val;
+    }
+    imprimir(im,q);
+
+}
 int main()
 {
     int a[LEN];
 
-	srand(time(NULL));
+   	srand(time(NULL));
 	int *p,*q;
+
 	p=a;q=p;
 	q+=(sizeof(a)/sizeof(int))-1;
+
 	for(int i=0;i<LEN;i++)
 		a[i]=rand()%100;
+
     imprimir(p,q);
-    selection(p,q);
+    //selection(p,q);
+    insertt(p,q);
     return 0;
 }
