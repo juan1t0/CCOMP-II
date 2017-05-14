@@ -64,10 +64,9 @@ int main()
 		p_aux[i]='-';
 	char *aux = p_aux;
 	char letra;
-	int i=0;
 	int vida=0;
 	char *a;
-
+	mostra(0);
 	cout<<p_aux<<endl;
 	while(vida != 6){
 		cin>>letra;
@@ -76,7 +75,12 @@ int main()
 		mostra(vida);
 		cout<<aux<<endl;
 		if(compare(p,aux)){
-			cout<<" -- GANASTE --"<<endl;
+
+cout<<"¸.•*´¨`*•.¸¸.•*´¨`*•.¸¸.•*´¨`*•.¸¸.•*´¨`*•.¸¸."<<endl; 
+cout<<"*...* :::::::╔════*☆.¸.☆*'════╗ ::::::::*...*"<<endl;
+cout<<"*¨`*•♫...•::║  --  GANASTE  --  ║ ::..*¨`*•♫.•"<<endl; 
+cout<<"*...* :::::::╚════*☆.¸.☆*'════╝ ::::::::*...*"<<endl; 
+cout<<"¸.•*´¨`*•.¸¸.•*´¨`*•.¸¸.•*´¨`*•.¸¸.•*´¨`*•.¸¸."<<endl;  
 			return 0;}
 	}
 
@@ -101,7 +105,8 @@ cout<<"     '$$$$O$    $$   $$    $$    o4$$$"<<endl;
 cout<<"        '$$o$   $$   $$$  $$   o$$$$"<<endl;
 cout<<"          '$$$$o$o$o$o$o$o$o$o$$$$"<<endl;
 cout<<"             $$$$$$$$$$$$$$$$$$$"<<endl;
-	
+cout<<endl<<"La palabra era: "<<p<<endl;
+
 	return 0;
 }
 
