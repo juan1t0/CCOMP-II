@@ -1,90 +1,44 @@
 #include <iostream>
-#include <stdio.h>
-#include <string>
+#include "Nodo.h"
 
 using namespace std;
-
-string dig1[10]={"cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve"};
-string dig2[10]={"once","doce","trece","catorce","quince","dieciseis","diecisiete","dieciocho","diecinueve"};
-string dig3[10]={"","diez","veinte","treinta","cuarenta","cincuenta","sesenta","setenta","ochenta","noventa"};
-string dig4[4]={"cien","ciento","cientos","entos"};
-string dig5[8]={"do","tre","cuatro","quini","seis","sete","ocho","nove"};
-string dig6[3]={"mil","millon","millones"};
-
-string escribe_0to99(long int numero){
-
-    if (numero < 10)
-        return dig1[numero];
-    else if(numero%10 == 0)
-        return dig3[(numero / 10)];
-    else if(numero<20&&numero>10)
-        return dig2[(numero %10)-1];
-    else if(numero<30&&numero>20)
-        return "veinti"+dig1[numero % 10];
-    else if(numero >30 && numero < 100){
-        return dig3[(numero / 10)] +" y "+dig1[(numero % 10)];
+Nodo* jossephus(int a){
+    Nodo *ne = new Nodo();
+    Nodo *aux = ne;
+    for(int i=1;i<a;i++){
+        ne->next=new Nodo(i);
+        ne=ne->next;
     }
+    ne->next=aux;
+    return aux;
 }
-string escribe_100to999(long int numero){
-    if(numero ==0)
-        return "";
-    if (numero <100)
-        return escribe_0to99(numero);
-    if((numero % 100) == 0){
-        if(numero == 100)
-            return dig4[0];
-        else if(numero != 500)
-            return dig5[(numero / 100)-2]+ dig4[2];
-        else if(numero == 500)
-            return dig5[3]+ dig4[3];}
-    else if(numero>100 && numero <200)
-        return dig4[1] +" "+( escribe_0to99(numero % 100));
-    else if(numero >=200 && numero <500)
-        return dig5[(numero / 100)-2]+ dig4[2] +" "+( escribe_0to99(numero % 100));
-    else if(numero >=500 && numero <600)
-        return dig5[(numero / 100)-2]+ dig4[3] +" "+( escribe_0to99(numero % 100));
-    else if(numero >=600 && numero <1000)
-        return dig5[(numero / 100)-2]+ dig4[2] +" "+( escribe_0to99(numero % 100));
+void imprimir(Nodo *a){
+    Nodo*aux=a;
+    while(a->next != aux){
+        cout<<a->valor<<" , ";
+        a=a->next;
+    }
+    cout<<a->valor<<endl;
 }
-
-string escribe_mil(long int numero){
-    if(numero==0)
-        return "";
-    if(numero<1000)
-        return escribe_100to999(numero);
-    if ((numero % 10000)==1)
-        return escribe_100to999(numero / 10000)+" y un "+dig6[0]+" "+escribe_100to999(numero %1000);
-    else if(numero < 1000000)
-        return escribe_100to999(numero /1000)+" "+dig6[0]+" "+escribe_100to999(numero %1000);
-
+void Matar(Nodo *ptr,int a,int sizz){
+    Nodo* p = ptr;
+    for(;sizz>2;sizz--){
+        for(int j=1;j<a-1;j++){
+            p=p->next;
+        }
+        Nodo* aux = p->next;
+        p->next=p->next->next;
+        cout<<aux->valor<<" ";
+        delete aux;
+        p=p->next;
+    }
+    cout<<endl;
+    cout<<"vive"<<p->valor<<" y "<<p->next->valor<<endl;
 }
-string escribe_millones( long int numero){
-    if(numero < 1000000)
-        return escribe_mil(numero);
-    if(numero < 100000000)
-        return escribe_0to99(numero / 1000000)+" "+dig6[2]+" "+escribe_mil(numero %1000000);
-    if(numero < 1000000000)
-        return escribe_100to999(numero/10000000)+" "+dig6[2]+" "+escribe_mil(numero %1000000);
-    else if(numero < 1000000000000)//999000-999000
-        return escribe_mil(numero/1000000)+" "+dig6[2]+" "+escribe_mil(numero%1000000);
-}/*
-string escribe( long int numero){
-    if (numero<100)
-        return escribe_0to99(numero);
-    else if(numero < 1000)
-        return escribe_100to999(numero);
-    else if(numero < 100000)
-        return escribe_mil(numero);
-    else if(numero < 100000000)
-        return escribe_0to99(numero / 1000000)+" "+dig6[2]+" "+escribe_100to999(numero %1000)+" "+dig6[0]+" "+escribe_100to999(numero %1000);
-    else if(numero < 10000000000)//999 19999999
-        return escribe_100to999(numero/10000000)+" "+dig6[2]+" "+escribe_100to999(numero %1000)+" "+dig6[0]+" "+escribe_100to999(numero %1000);
-}*/
 int main()
 {
-    cout<<"ingrese un numero : "<<endl;
-    long int num;
-    cin>>num;
-    cout<<escribe_millones(num)<<endl;;
+    Nodo *jose = jossephus(30);
+  //  imprimir(jose);
+    Matar(jose,3,30);
     return 0;
 }
